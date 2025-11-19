@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Booking Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="left-group">
+      <button class="back-btn" onclick="window.history.back()"><span class="icon-arrow"></span></button>
+    </div>
+    <h1 class="topbar-title">Booking Details</h1>
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button> <!-- keep same, the CSS fixes it -->
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="page">
+
+    <!-- Selected Car Summary -->
+    <div class="selected-car-card">
+      <img id="selectedCarImage" src="images/Tucson.png" class="selected-car-img" alt="Selected Car" />
+
+      <div class="selected-car-info">
+        <h2 id="selectedCarName" class="selected-car-name">Selected Car</h2>
+        <p id="selectedCarMeta" class="selected-car-meta">
+          Engine • Transmission
+        </p>
+        <p id="selectedCarSeats" class="selected-car-meta">
+          Seats information
+        </p>
+        <p id="selectedCarPrice" class="selected-car-price">
+          Price/day
+        </p>
+      </div>
+    </div>
+
+    <!-- Booking Form Card -->
+    <section class="form-card">
+      <h2 class="section-title">Your Details</h2>
+
+      <form action="payment.html" method="GET" class="form">
+
+        <div class="form-group">
+          <label class="form-label" for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" class="form-input" placeholder="Enter your full name"
+            required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" class="form-input" placeholder="05XXXXXXXX" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="pickup">Pick-up Date</label>
+            <input type="date" id="pickup" name="pickup" class="form-input date-input" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="return">Return Date</label>
+            <input type="date" id="return" name="return" class="form-input date-input" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="note">Note (Optional)</label>
+          <textarea id="note" name="note" class="form-input textarea"
+            placeholder="Example: Need child seat, arriving late…"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary full-width">
+          Proceed to Payment
+        </button>
+
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Script: selected car + date picker behaviour -->
+  <script>
+    // ---- CAR DATA ----
+    const cars = {
+      Tucson: {
+        name: "Hyundai Tucson",
+        engine: "1600cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: "180 NIS/day",
+        img: "images/Tucson.png",
+      },
+      Yarris: {
+        name: "Toyota Yaris",
+        engine: "1200cc • Automatic",
+        seats: "4 Seats • Petrol",
+        price: "140 NIS/day",
+        img: "images/Yarris.png",
+      },
+      Sportage: {
+        name: "Kia Sportage",
+        engine: "1600cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: "170 NIS/day",
+        img: "images/Sportage.png",
+      },
+      Mazda3: {
+        name: "Mazda 3",
+        engine: "2000cc • Automatic",
+        seats: "5 Seats • Petrol",
+        price: "160 NIS/day",
+        img: "images/Mazda3.png",
+      },
+      Carnival: {
+        name: "Kia Carnival",
+        engine: "2200cc • Automatic",
+        seats: "7 Seats • Diesel",
+        price: "250 NIS/day",
+        img: "images/Carnival.png",
+      },
+      i10: {
+        name: "Hyundai i10",
+        engine: "1000cc • Automatic",
+        seats: "4 Seats • Petrol",
+        price: "110 NIS/day",
+        img: "images/i10.png",
+      },
+      Passat: {
+        name: "Volkswagen Passat",
+        engine: "1800cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: "190 NIS/day",
+        img: "images/Passat.png",
+      },
+      X1: {
+        name: "BMW X1",
+        engine: "2000cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: "300 NIS/day",
+        img: "images/X1.png",
+      },
+    };
+
+    // Read ?car= from the URL
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("car") || "Tucson";
+    const car = cars[key] || cars["Tucson"];
+
+    // Update the Selected Car UI
+    document.getElementById("selectedCarImage").src = car.img;
+    document.getElementById("selectedCarImage").alt = car.name;
+    document.getElementById("selectedCarName").textContent = car.name;
+    document.getElementById("selectedCarMeta").textContent = car.engine;
+    document.getElementById("selectedCarSeats").textContent = car.seats;
+    document.getElementById("selectedCarPrice").textContent = car.price;
+
+    // ---- DATE PICKER BEHAVIOUR ----
+    function attachPicker(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      // Open native calendar when field is focused or clicked (modern browsers)
+      if (el.showPicker) {
+        el.addEventListener("click", () => el.showPicker());
+        el.addEventListener("focus", () => el.showPicker());
+      }
+
+      // Prevent manual typing
+      el.addEventListener("keydown", (e) => e.preventDefault());
+    }
+
+    attachPicker("pickup");
+    attachPicker("return");
+
+    // ---- MENU TOGGLE ----
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPopup = document.getElementById('menuPopup');
+
+    menuBtn.addEventListener('click', () => {
+      menuPopup.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+        menuPopup.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+
+</html>

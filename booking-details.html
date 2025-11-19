@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Booking Details</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="left-group">
+      <button class="back-btn" onclick="window.history.back()">
+        <span class="icon-arrow"></span>
+      </button>
+    </div>
+    <h1 class="topbar-title">Booking Details</h1>
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button>
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="page">
+
+    <!-- Booking Details Card -->
+    <div class="booking-details-card">
+
+      <!-- Header with Car Image and Info -->
+      <div class="booking-details-header">
+        <img src="Images/Tucson.png" alt="Hyundai Tucson" class="booking-details-img" />
+        <div class="booking-details-info">
+          <h2 class="booking-details-name">Hyundai Tucson</h2>
+          <span class="booking-details-status upcoming">Upcoming</span>
+        </div>
+      </div>
+
+      <!-- Trip Information (CARD 1) -->
+      <section class="trip-info trip-card">
+        <h3 class="section-title">Trip Information</h3>
+
+        <div class="trip-row">
+          <span class="trip-label">Pickup Date</span>
+          <span class="trip-value">10 Dec 2025</span>
+        </div>
+
+        <div class="trip-row">
+          <span class="trip-label">Return Date</span>
+          <span class="trip-value">18 Dec 2025</span>
+        </div>
+
+        <div class="trip-row">
+          <span class="trip-label">Duration</span>
+          <span class="trip-value">8 days</span>
+        </div>
+      </section>
+
+      <!-- Payment Summary (CARD 2) -->
+      <section class="payment-summary payment-card">
+        <h3 class="section-title">Payment Summary</h3>
+
+        <div class="detail-row">
+          <span class="detail-label">Daily Rate</span>
+          <span class="detail-value">180 NIS</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Number of Days</span>
+          <span class="detail-value">8</span>
+        </div>
+
+        <div class="detail-row">
+          <span class="detail-label">Subtotal</span>
+          <span class="detail-value">1,440 NIS</span>
+        </div>
+
+        <div class="detail-row total-row">
+          <span class="detail-label">Amount Due</span>
+          <span class="detail-value total-amount">1,440 NIS</span>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="booking-actions">
+        <a href="bookings.html" class="btn btn-primary full-width">
+          Back to Bookings
+        </a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+    // ---- MENU TOGGLE ----
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPopup = document.getElementById('menuPopup');
+
+    menuBtn.addEventListener('click', () => {
+      menuPopup.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+        menuPopup.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

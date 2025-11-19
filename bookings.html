@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – My Bookings</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="left-group">
+      <button class="back-btn" onclick="window.history.back()">
+        <span class="icon-arrow"></span>
+      </button>
+    </div>
+    <h1 class="topbar-title">My Bookings</h1>
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button>
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <!-- NOTE: added `bookings-layout` for phone-first sizing -->
+  <main class="page bookings-layout">
+
+    <!-- New Booking Button -->
+    <div class="new-booking-container">
+      <a href="home.html" class="btn btn-primary full-width">New Booking</a>
+    </div>
+
+    <!-- Bookings List -->
+    <div class="bookings-list">
+      <p class="bookings-intro">
+        Your upcoming and past reservations are shown below.
+      </p>
+
+      <!-- Booking 1 -->
+      <article class="booking-card">
+        <div class="booking-image-wrap">
+          <img src="Images/Tucson.png" alt="Hyundai Tucson" class="booking-img" />
+        </div>
+        <div class="booking-body">
+          <div class="booking-header-row">
+            <div>
+              <h3 class="booking-name">Hyundai Tucson</h3>
+              <p class="booking-dates">10 Dec 2025 – 18 Dec 2025</p>
+            </div>
+            <span class="booking-status upcoming">Upcoming</span>
+          </div>
+
+          <div class="booking-footer-row">
+            <div class="booking-total-wrap">
+              <span class="booking-label">Total</span>
+              <p class="booking-total">1,440 NIS</p>
+            </div>
+            <a href="booking-details.html" class="booking-view-link">View</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Booking 2 -->
+      <article class="booking-card">
+        <div class="booking-image-wrap">
+          <img src="Images/Sportage.png" alt="Kia Sportage" class="booking-img" />
+        </div>
+        <div class="booking-body">
+          <div class="booking-header-row">
+            <div>
+              <h3 class="booking-name">Kia Sportage</h3>
+              <p class="booking-dates">01 Nov 2025 – 05 Nov 2025</p>
+            </div>
+            <span class="booking-status completed">Completed</span>
+          </div>
+
+          <div class="booking-footer-row">
+            <div class="booking-total-wrap">
+              <span class="booking-label">Total</span>
+              <p class="booking-total">680 NIS</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Booking 3 -->
+      <article class="booking-card">
+        <div class="booking-image-wrap">
+          <img src="Images/X1.png" alt="BMW X1" class="booking-img" />
+        </div>
+        <div class="booking-body">
+          <div class="booking-header-row">
+            <div>
+              <h3 class="booking-name">BMW X1</h3>
+              <p class="booking-dates">20 Aug 2025 – 25 Aug 2025</p>
+            </div>
+            <span class="booking-status cancelled">Cancelled</span>
+          </div>
+
+          <div class="booking-footer-row">
+            <div class="booking-total-wrap">
+              <span class="booking-label">Total</span>
+              <p class="booking-total">1,500 NIS</p>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Empty State (keep for later if needed) -->
+      <!--
+      <div class="empty-state">
+        <div class="empty-icon">📅</div>
+        <h3 class="empty-title">No bookings yet</h3>
+        <p class="empty-subtitle">When you reserve a car, it will appear here.</p>
+        <a href="home.html" class="btn btn-primary">Browse Cars</a>
+      </div>
+      -->
+    </div>
+
+  </main>
+
+  <script>
+    // ---- MENU TOGGLE ----
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPopup = document.getElementById('menuPopup');
+
+    menuBtn.addEventListener('click', () => {
+      menuPopup.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+        menuPopup.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

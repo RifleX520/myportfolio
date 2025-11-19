@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+  <div class="container-center">
+
+    <div class="login-card">
+      <h1 class="title">DrivePal</h1>
+      <p class="subtitle">Sign in to continue</p>
+
+      <form action="home.html" method="GET" class="form">
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email" 
+            required 
+            class="form-input" 
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            required 
+            class="form-input" 
+            placeholder="Enter your password"
+          />
+        </div>
+
+        <!-- Login button -->
+        <button type="submit" class="btn btn-primary full-width">
+          Login
+        </button>
+
+        <!-- Divider -->
+        <div class="separator">
+          <span></span><p>or</p><span></span>
+        </div>
+
+        <!-- Google button (fake, UI only) -->
+        <button type="button" class="btn btn-secondary full-width">
+          Continue with Google
+        </button>
+
+        <!-- Sign up -->
+        <p class="footer-text">
+          Don’t have an account?
+          <a href="#" class="link">Sign up</a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</body>
+</html>

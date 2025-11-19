@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Car Rental</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <h1 class="topbar-title fixissue-title">DrivePal</h1>
+    <!-- Menu Button & Popup -->
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button>
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <!-- NOTE: added `home-layout` so we can clamp width to 430px on this page -->
+  <main class="page home-layout">
+
+    <!-- Filters & Sorting -->
+    <section class="filters-section">
+      <div class="filter-group">
+        <label class="filter-label">Filter by Type</label>
+        <select id="typeFilter" class="filter-select">
+          <option value="all">All Types</option>
+          <option value="SUV">SUV</option>
+          <option value="Sedan">Sedan</option>
+          <option value="Small">Small</option>
+          <option value="Van">Van</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Filter by Price</label>
+        <select id="priceFilter" class="filter-select">
+          <option value="all">All Prices</option>
+          <option value="low">Low (&lt;150 NIS)</option>
+          <option value="mid">Mid (150–200 NIS)</option>
+          <option value="high">High (&gt;200 NIS)</option>
+        </select>
+      </div>
+
+      <div class="filter-group sort-group">
+        <label class="filter-label">Sort by</label>
+        <select id="sortSelect" class="filter-select">
+          <option value="name-asc">Name (A–Z)</option>
+          <option value="name-desc">Name (Z–A)</option>
+          <option value="price-low">Price (Low to High)</option>
+          <option value="price-high">Price (High to Low)</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Car List -->
+    <section class="car-grid" id="carGrid">
+      <!-- Cards populated by JS -->
+    </section>
+
+  </main>
+
+  <!-- Script: car data + filtering + sorting -->
+  <script>
+    // ================== CAR DATA ==================
+    const cars = [
+      {
+        id: "Tucson",
+        name: "Hyundai Tucson",
+        type: "SUV",
+        engine: "1600cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: 180,
+        img: "Images/Tucson.png",
+      },
+      {
+        id: "Yarris",
+        name: "Toyota Yaris",
+        type: "Small",
+        engine: "1200cc • Automatic",
+        seats: "4 Seats • Petrol",
+        price: 140,
+        img: "Images/Yarris.png",
+      },
+      {
+        id: "Sportage",
+        name: "Kia Sportage",
+        type: "SUV",
+        engine: "1600cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: 170,
+        img: "Images/Sportage.png",
+      },
+      {
+        id: "Mazda3",
+        name: "Mazda 3",
+        type: "Sedan",
+        engine: "2000cc • Automatic",
+        seats: "5 Seats • Petrol",
+        price: 160,
+        img: "Images/Mazda3.png",
+      },
+      {
+        id: "Carnival",
+        name: "Kia Carnival",
+        type: "Van",
+        engine: "2200cc • Automatic",
+        seats: "7 Seats • Diesel",
+        price: 250,
+        img: "Images/Carnival.png",
+      },
+      {
+        id: "i10",
+        name: "Hyundai i10",
+        type: "Small",
+        engine: "1000cc • Automatic",
+        seats: "4 Seats • Petrol",
+        price: 110,
+        img: "Images/i10.png",
+      },
+      {
+        id: "Passat",
+        name: "Volkswagen Passat",
+        type: "Sedan",
+        engine: "1800cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: 190,
+        img: "Images/Passat.png",
+      },
+      {
+        id: "X1",
+        name: "BMW X1",
+        type: "SUV",
+        engine: "2000cc Turbo • Automatic",
+        seats: "5 Seats • Petrol",
+        price: 300,
+        img: "Images/X1.png",
+      },
+    ];
+
+    // ================== RENDER CARS ==================
+    function renderCars(list) {
+      const grid = document.getElementById("carGrid");
+      grid.innerHTML = "";
+
+      list.forEach((car) => {
+        const card = document.createElement("article");
+        card.className = "car-card";
+
+        card.innerHTML = `
+          <div class="car-img-wrap">
+            <img src="${car.img}" alt="${car.name}" class="car-img" />
+          </div>
+          <div class="car-body">
+            <h3 class="car-name">${car.name}</h3>
+            <p class="car-meta">${car.engine}</p>
+            <p class="car-meta">${car.seats}</p>
+
+            <div class="car-footer-row">
+              <div class="car-price-block">
+                <span class="car-price-label">From</span>
+                <p class="car-price">${car.price} NIS/day</p>
+              </div>
+              <a href="booking.html?car=${car.id}" class="btn btn-primary car-book-btn">
+                Book Now
+              </a>
+            </div>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+
+    // ================== FILTER + SORT ==================
+    function filterAndSortCars() {
+      const typeValue = document.getElementById("typeFilter").value;
+      const priceValue = document.getElementById("priceFilter").value;
+      const sortValue = document.getElementById("sortSelect").value;
+
+      let result = [...cars];
+
+      // --- filter by type ---
+      if (typeValue !== "all") {
+        result = result.filter((car) => car.type === typeValue);
+      }
+
+      // --- filter by price ---
+      if (priceValue !== "all") {
+        if (priceValue === "low") {
+          result = result.filter((car) => car.price < 150);
+        } else if (priceValue === "mid") {
+          result = result.filter((car) => car.price >= 150 && car.price <= 200);
+        } else if (priceValue === "high") {
+          result = result.filter((car) => car.price > 200);
+        }
+      }
+
+      // --- sorting ---
+      if (sortValue === "name-asc") {
+        result.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (sortValue === "name-desc") {
+        result.sort((a, b) => b.name.localeCompare(a.name));
+      } else if (sortValue === "price-low") {
+        result.sort((a, b) => a.price - b.price);
+      } else if (sortValue === "price-high") {
+        result.sort((a, b) => b.price - a.price);
+      }
+
+      renderCars(result);
+    }
+
+    // ================== EVENT LISTENERS ==================
+    document.getElementById("typeFilter").addEventListener("change", filterAndSortCars);
+    document.getElementById("priceFilter").addEventListener("change", filterAndSortCars);
+    document.getElementById("sortSelect").addEventListener("change", filterAndSortCars);
+
+    // initial load
+    renderCars(cars);
+
+    // ================== MENU POPUP ==================
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPopup = document.getElementById("menuPopup");
+
+    menuBtn.addEventListener("click", () => {
+      menuPopup.classList.toggle("show");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+        menuPopup.classList.remove("show");
+      }
+    });
+  </script>
+
+</body>
+
+</html>

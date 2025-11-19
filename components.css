@@ -1,0 +1,1211 @@
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  padding: 11px 18px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    transform 0.12s ease,
+    box-shadow 0.12s ease,
+    background 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #0a84ff, #4aa8ff);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(10, 132, 255, 0.35);
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(10, 132, 255, 0.45);
+}
+
+.btn-secondary {
+  background: var(--surface-soft);
+  color: var(--text-main);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--surface);
+}
+
+.btn-logout {
+  background: var(--danger);
+  color: #ffffff;
+}
+
+.btn-logout:hover {
+  opacity: 0.9;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.btn.small {
+  padding: 8px 14px;
+  font-size: 13px;
+}
+
+/* =========================================
+   LOGIN LAYOUT
+   ========================================= */
+
+.container-center {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.login-card {
+  background: var(--surface-soft);
+  border-radius: 26px;
+  padding: 28px 26px 24px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  gap: 8px;
+}
+
+.separator span {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.separator p {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+/* =========================================
+   TOP BAR (BACK + TITLE + MENU)
+   ========================================= */
+
+.topbar {
+  background: rgba(12, 12, 16, 0.96);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 56px;
+  padding: 10px 16px;
+}
+
+.left-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.topbar-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Back + menu share look */
+.back-btn,
+.menu-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--surface-soft);
+  border: none;
+  color: var(--text-main);
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Arrow inside back button */
+.icon-arrow {
+  width: 8px;
+  height: 8px;
+  border-left: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
+  transform: rotate(45deg);
+}
+
+/* Hover / active */
+.back-btn:hover,
+.menu-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.back-btn:active,
+.menu-btn:active {
+  transform: scale(0.95);
+}
+
+/* Menu container on the right inside topbar */
+.menu-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+}
+
+/* Larger screens – slightly bigger */
+@media (min-width: 768px) {
+  .topbar {
+    height: 60px;
+    padding: 12px 22px;
+  }
+
+  .topbar-title {
+    font-size: 1.4rem;
+  }
+
+  .back-btn,
+  .menu-btn {
+    width: 42px;
+    height: 42px;
+    font-size: 22px;
+  }
+}
+
+/* =========================================
+   MENU POPUP
+   ========================================= */
+
+.menu-popup {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  min-width: 160px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease;
+}
+
+.menu-popup.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-item {
+  display: block;
+  padding: 12px 16px;
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:hover {
+  background: var(--surface);
+}
+
+/* =========================================
+   BOTTOM NAV
+   ========================================= */
+
+.bottombar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: rgba(12, 12, 16, 0.98);
+  backdrop-filter: blur(18px);
+  border-top: 1px solid var(--border);
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  z-index: 60;
+}
+
+.bottombar-inner {
+  width: 100%;
+  max-width: 1120px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 12px;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-item span {
+  font-size: 16px;
+}
+
+.nav-item.active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* =========================================
+   PAGE LAYOUT HELPERS
+   ========================================= */
+
+/* Phone-first wrapper for specific pages */
+.page.home-layout {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 14px 14px 88px; /* space for bottom nav */
+}
+
+.page.bookings-layout {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 14px 14px 88px; /* bottom space for nav */
+}
+
+/* =========================================
+   FILTERS (HOME) – GLASS CARD
+   ========================================= */
+
+.filters-section {
+  background: radial-gradient(circle at top left, #171b27, #0e0f15);
+  border-radius: 22px;
+  padding: 14px 14px 16px;
+  margin: 8px 0 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px 12px;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.filter-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #d3d7e6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.filter-select {
+  width: 100%;
+  background: #101119;
+  border-radius: 14px;
+  border: 1px solid #262a37;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  color: #f3f5ff;
+  outline: none;
+  appearance: none;
+}
+
+.filter-select:focus {
+  border-color: #2f7dff;
+  box-shadow: 0 0 0 1px rgba(47, 125, 255, 0.4);
+}
+
+/* Wider phones – two columns, sort full width */
+@media (min-width: 480px) and (max-width: 768px) {
+  .filters-section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filters-section .sort-group {
+    grid-column: 1 / -1;
+  }
+}
+
+/* =========================================
+   CAR GRID (HOME)
+   ========================================= */
+
+.car-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Card = full-width glass block, image on top */
+.car-card {
+  background: radial-gradient(circle at top left, #232533, #12131a);
+  border-radius: 22px;
+  padding: 10px 10px 14px;
+  text-decoration: none;
+  color: var(--text-main);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+/* full-width image with smooth corners */
+.car-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #111;
+  display: block;
+}
+
+/* info area under image */
+.car-info {
+  padding: 6px 2px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.car-name {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 2px 0;
+}
+
+.car-meta,
+.car-info-small {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* price highlighted in blue like a rate/amount */
+.car-price {
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 6px;
+  color: var(--primary);
+}
+
+/* align button with content, pill + glow */
+.car-card .btn.btn-primary {
+  margin-top: 8px;
+  padding: 9px 18px;
+  font-size: 0.9rem;
+  align-self: flex-start;
+  box-shadow: 0 10px 26px rgba(10, 132, 255, 0.45);
+}
+
+/* small hover lift on the whole card */
+.car-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+}
+
+/* =========================================
+   SELECTED CAR CARD (BOOKING) 
+   ========================================= */
+
+.selected-car-card,
+.payment-car-card {
+  background: var(--surface-soft);
+  border-radius: 22px;
+  padding: 14px;
+  display: flex;
+  gap: 14px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 18px;
+}
+
+.selected-car-img,
+.payment-car-img {
+  width: 120px;
+  height: 80px;
+  object-fit: contain;
+  background: #111;
+  border-radius: 18px;
+}
+
+.selected-car-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.selected-car-meta,
+.selected-car-price,
+.summary-line {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   FORMS (GENERIC)
+   ========================================= */
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.form-input,
+textarea.form-input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-main);
+  padding: 11px 12px;
+  font-size: 14px;
+}
+
+textarea.form-input {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.date-input {
+  cursor: pointer;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+/* Card wrapper for forms (booking page etc.) */
+.form-card {
+  background: var(--surface-soft);
+  border-radius: 22px;
+  padding: 18px 16px 20px;
+  box-shadow: var(--shadow-soft);
+  margin-top: 18px;
+}
+
+/* =========================================
+   PAYMENT PAGE – MOBILE-FIRST
+   ========================================= */
+
+/* Constrain whole payment content to phone width even on desktop */
+.page.payment-layout {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 12px 12px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Top: card visual + trip summary */
+.payment-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Blue card visual */
+.card-visual {
+  position: relative;
+  background: linear-gradient(135deg, #2e8dff, #0a63ff);
+  border-radius: 24px;
+  padding: 18px 20px 22px;
+  color: #ffffff;
+  min-height: 190px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-brand {
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.card-chip {
+  width: 34px;
+  height: 26px;
+  border-radius: 8px;
+  background: #ffd75a;
+  margin-top: 10px;
+}
+
+.card-number {
+  margin: 26px 0 10px;
+  letter-spacing: 0.13em;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.card-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.card-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.card-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Trip + price summary under card */
+.payment-summary {
+  background: #17181f;
+  border-radius: 20px;
+  padding: 14px 16px 16px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.5);
+}
+
+/* Rows for summary */
+.payment-summary .summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+.payment-summary .summary-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9aa1c2;
+}
+
+.payment-summary .summary-value {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #f4f5ff;
+  text-align: right;
+}
+
+/* Amount row slightly highlighted */
+.payment-summary .summary-row.total {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #262a37;
+}
+
+.payment-summary .summary-row.total .summary-value {
+  color: #4aa8ff;
+  font-weight: 700;
+}
+
+/* Payment form card */
+.payment-form-card {
+  background: #17181f;
+  border-radius: 22px;
+  padding: 18px 16px 22px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+}
+
+.payment-form-card .section-title {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.pay-section-title {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  color: #cfd3ec;
+}
+
+/* Form spacing inside payment card */
+.payment-form-card .form-group {
+  margin-bottom: 12px;
+}
+
+.payment-form-card .form-input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: none;
+  background: #101119;
+  color: #f4f5ff;
+  font-size: 0.9rem;
+}
+
+.payment-form-card .form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.payment-form-card .form-row .form-group {
+  flex: 1;
+}
+
+/* Buttons on payment page */
+.payment-form-card .btn.full-width {
+  width: 100%;
+  border-radius: 999px;
+  padding: 11px 0;
+  font-size: 0.95rem;
+}
+
+.payment-form-card .btn.btn-primary {
+  margin-top: 6px;
+}
+
+.payment-form-card .btn.btn-secondary {
+  margin-top: 6px;
+  background: #242633;
+  color: #f5f6ff;
+}
+
+/* Or separator */
+.or-separator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0 4px;
+  font-size: 0.8rem;
+  color: #8f95b3;
+}
+
+.or-separator span {
+  flex: 1;
+  height: 1px;
+  background: #2a2d3b;
+}
+
+/* =========================================
+   PROFILE / BOOKINGS / CONTACT
+   ========================================= */
+
+/* ---- PROFILE CARD ---- */
+
+.profile-card {
+  background: var(--surface-soft);
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.profile-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0a84ff, #58a9ff);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* ---- BOOKINGS PAGE – PHONE FIRST ---- */
+
+.new-booking-container {
+  margin: 10px 0 14px;
+  text-align: center;
+}
+
+.new-booking-container .btn {
+  max-width: 260px;
+  width: 100%;
+  box-shadow: 0 14px 32px rgba(10, 132, 255, 0.45);
+}
+
+.bookings-list {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.bookings-intro {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-bottom: 16px;
+}
+
+/* Booking card */
+
+.booking-card {
+  background: radial-gradient(circle at top left, #232533, #12131a);
+  border-radius: 22px;
+  padding: 10px 10px 12px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Image section */
+
+.booking-image-wrap {
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b0b10;
+}
+
+.booking-img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Body */
+
+.booking-body {
+  padding: 6px 4px 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* header row: name + dates + status */
+
+.booking-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.booking-name {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  color: var(--text-main);
+}
+
+.booking-dates {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* status pill */
+
+.booking-status {
+  font-size: 0.65rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.booking-status.upcoming {
+  background: rgba(10, 132, 255, 0.18);
+  color: #4aa8ff;
+}
+
+.booking-status.completed {
+  background: rgba(107, 114, 128, 0.18);
+  color: #9ca3af;
+}
+
+.booking-status.cancelled {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+}
+
+/* footer row: total + optional view */
+
+.booking-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.booking-total-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* receipt-style label + amount */
+
+.booking-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8c93b0;
+}
+
+.booking-total {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin: 0;
+}
+
+/* subtle premium view button */
+
+.booking-view-link {
+  font-size: 0.78rem;
+  color: #d6ddff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(18, 22, 40, 0.9);
+  border: 1px solid rgba(120, 140, 255, 0.35);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.55);
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.booking-view-link:hover {
+  background: rgba(26, 32, 60, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.65);
+  border-color: rgba(160, 182, 255, 0.7);
+}
+
+/* Empty state for future use */
+
+.empty-state {
+  margin-top: 28px;
+  padding: 24px 18px 20px;
+  background: radial-gradient(circle at top, #1a1b26, #101018);
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+}
+
+.empty-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.empty-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.empty-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Contact card */
+
+.contact-card {
+  background: var(--surface-soft);
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.contact-line {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.contact-description {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   BOOKING DETAILS PAGE
+   ========================================= */
+
+.booking-details-card {
+  background: var(--surface-soft);
+  border-radius: 22px;
+  padding: 18px 16px 20px;
+  box-shadow: var(--shadow-soft);
+  max-width: 430px; /* phone-first */
+  margin: 12px auto 80px;
+}
+
+/* header inside the card */
+.booking-details-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.booking-details-img {
+  width: 100%;
+  max-width: 360px;
+  height: 140px;
+  border-radius: 18px;
+  object-fit: cover;
+  background: #111;
+}
+
+.booking-details-info {
+  position: absolute; /* let image be full width on mobile */
+  left: 18px;
+  bottom: 18px;
+}
+
+.booking-details-name {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 4px 0;
+  color: var(--text-main);
+}
+
+/* status pill reused */
+.booking-details-status {
+  font-size: 0.7rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.booking-details-status.upcoming {
+  background: rgba(10, 132, 255, 0.15);
+  color: #4aa8ff;
+}
+
+/* when card gets narrower, stack content */
+@media (max-width: 600px) {
+  .booking-details-header {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .booking-details-img {
+    width: 100%;
+    height: 160px;
+  }
+
+  .booking-details-info {
+    position: static;
+    margin-top: 8px;
+  }
+}
+
+/* small, uppercase section titles */
+.booking-details-card .section-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9aa1c2;
+  margin: 0 0 8px 0;
+}
+
+/* inner cards: trip + payment */
+.trip-card,
+.payment-card {
+  background: #14151d;
+  border-radius: 18px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* rows inside the cards */
+.trip-row,
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 4px 0;
+}
+
+.trip-label,
+.detail-label {
+  color: var(--text-muted);
+}
+
+.trip-value,
+.detail-value {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+/* total row at bottom of payment card */
+.payment-card .total-row {
+  margin-top: 6px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(10, 132, 255, 0.12);
+}
+
+.payment-card .total-amount {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* make Back button stick visually to card width */
+.booking-actions {
+  margin-top: 6px;
+}
+
+.booking-actions .btn {
+  margin-top: 4px;
+}
+
+/* =========================================
+   SMALL GLOBAL RESPONSIVE TWEAKS
+   ========================================= */
+
+@media (max-width: 640px) {
+  .page {
+    padding-inline: 16px;
+  }
+
+  .car-card {
+    border-radius: 18px;
+  }
+}
+
+/* ===== SMALL TRIP SUMMARY (UNDER FORM) ===== */
+
+.compact-summary {
+  margin-top: -6px;
+  padding: 6px 2px 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  font-size: 0.78rem;
+  color: #aeb5cc;
+}
+
+.compact-summary .summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.compact-summary .summary-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7680a3;
+}
+
+.compact-summary .summary-value {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #eef0ff;
+  text-align: right;
+}

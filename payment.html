@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="topbar">
+    <div class="left-group">
+      <button class="back-btn" onclick="window.history.back()"><span class="icon-arrow"></span></button>
+    </div>
+    <h1 class="topbar-title">Payment</h1>
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button> <!-- keep same, the CSS fixes it -->
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+<main class="page payment-layout">
+  <!-- BLUE CARD ONLY -->
+  <section class="payment-preview">
+    <div class="card-visual">
+      <div class="card-brand">DRIVEPAL</div>
+      <div class="card-chip"></div>
+
+      <div class="card-number" id="cardNumberPreview">
+        •••• •••• •••• ••••
+      </div>
+
+      <div class="card-bottom-row">
+        <div>
+          <div class="card-label">CARDHOLDER</div>
+          <div class="card-value" id="cardNamePreview">
+            Your Name
+          </div>
+        </div>
+        <div>
+          <div class="card-label">EXPIRES</div>
+          <div class="card-value" id="cardExpiryPreview">
+            MM/YY
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT FORM (same as before) -->
+  <section class="payment-form-card">
+    <h2 class="section-title">Payment Method</h2>
+
+    <form action="success.html" method="GET" class="form">
+      <h3 class="pay-section-title">Pay with Card</h3>
+
+      <div class="form-group">
+        <label class="form-label" for="cardName">Cardholder Name</label>
+        <input
+          type="text"
+          id="cardName"
+          name="cardName"
+          class="form-input"
+          placeholder="Full name on card"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="cardNumber">Card Number</label>
+        <input
+          type="text"
+          id="cardNumber"
+          name="cardNumber"
+          class="form-input"
+          placeholder="1234 5678 9012 3456"
+          maxlength="19"
+          required
+        />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="expiry">Expiry Date</label>
+          <input
+            type="text"
+            id="expiry"
+            name="expiry"
+            class="form-input"
+            placeholder="MM/YY"
+            maxlength="5"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="cvv">CVV</label>
+          <input
+            type="password"
+            id="cvv"
+            name="cvv"
+            class="form-input"
+            placeholder="123"
+            maxlength="3"
+            required
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary full-width">
+        Pay Now
+      </button>
+
+      <div class="or-separator">
+        <span></span>
+        <p>Or</p>
+        <span></span>
+      </div>
+
+      <button type="button" class="btn btn-secondary full-width">
+        Pay on Arrival
+      </button>
+    </form>
+  </section>
+
+  <!-- SMALL TRIP SUMMARY UNDER THE FORM -->
+  <section class="payment-summary compact-summary">
+    <div class="summary-row">
+      <span class="summary-label">Car</span>
+      <span class="summary-value" id="summaryCarName">Hyundai Tucson</span>
+    </div>
+
+    <div class="summary-row">
+      <span class="summary-label">Price</span>
+      <span class="summary-value" id="summaryCarPrice">180 NIS/day</span>
+    </div>
+
+    <div class="summary-row">
+      <span class="summary-label">Trip</span>
+      <span class="summary-value" id="summaryTrip">
+        2025-11-19 – 2025-12-04
+      </span>
+    </div>
+  </section>
+</main>
+
+
+  <!-- JS: fill summary + card preview + expiry formatting -->
+  <script>
+    // ---- CAR DATA (same keys as booking page) ----
+    const cars = {
+      Tucson: {
+        name: "Hyundai Tucson",
+        price: "180 NIS/day",
+      },
+      Yarris: {
+        name: "Toyota Yaris",
+        price: "140 NIS/day",
+      },
+      Sportage: {
+        name: "Kia Sportage",
+        price: "170 NIS/day",
+      },
+      Mazda3: {
+        name: "Mazda 3",
+        price: "160 NIS/day",
+      },
+      Carnival: {
+        name: "Kia Carnival",
+        price: "250 NIS/day",
+      },
+      i10: {
+        name: "Hyundai i10",
+        price: "110 NIS/day",
+      },
+      Passat: {
+        name: "Volkswagen Passat",
+        price: "190 NIS/day",
+      },
+      X1: {
+        name: "BMW X1",
+        price: "300 NIS/day",
+      },
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("car") || "Tucson";
+    const car = cars[key] || cars["Tucson"];
+
+    // Fill summary info
+    document.getElementById("summaryCarName").textContent = car.name;
+    document.getElementById("summaryCarPrice").textContent = car.price;
+
+    const pickup = params.get("pickup") || "—";
+    const ret = params.get("return") || "—";
+    document.getElementById("summaryTrip").textContent =
+      `${pickup} – ${ret}`;
+
+
+    // ---- Card Preview (name + number + expiry) ----
+    const cardNameInput = document.getElementById("cardName");
+    const cardNumberInput = document.getElementById("cardNumber");
+    const expiryInput = document.getElementById("expiry");
+
+    const cardNamePreview = document.getElementById("cardNamePreview");
+    const cardNumberPreview = document.getElementById("cardNumberPreview");
+    const cardExpiryPreview = document.getElementById("cardExpiryPreview");
+
+    cardNameInput.addEventListener("input", () => {
+      cardNamePreview.textContent =
+        cardNameInput.value.trim() || "Your Name";
+    });
+
+    cardNumberInput.addEventListener("input", () => {
+      let digits = cardNumberInput.value.replace(/\D/g, "").slice(0, 16);
+      // group into 4-4-4-4
+      const groups = [];
+      for (let i = 0; i < digits.length; i += 4) {
+        groups.push(digits.slice(i, i + 4));
+      }
+      const formatted = groups.join(" ");
+      cardNumberInput.value = formatted;
+      cardNumberPreview.textContent =
+        formatted || "•••• •••• •••• ••••";
+    });
+
+    expiryInput.addEventListener("input", () => {
+      let digits = expiryInput.value.replace(/\D/g, "").slice(0, 4); // MMYY
+      if (digits.length >= 3) {
+        expiryInput.value = digits.slice(0, 2) + "/" + digits.slice(2);
+      } else {
+        expiryInput.value = digits;
+      }
+      cardExpiryPreview.textContent = expiryInput.value || "MM/YY";
+    });
+
+    // ---- MENU TOGGLE ----
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPopup = document.getElementById('menuPopup');
+
+    menuBtn.addEventListener('click', () => {
+      menuPopup.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+        menuPopup.classList.remove('show');
+      }
+    });
+
+    // ---- PAY ON ARRIVAL BUTTON ----
+    const payOnArrivalBtn = document.querySelector('.btn.btn-secondary.full-width');
+    payOnArrivalBtn.addEventListener('click', () => {
+      window.location.href = 'success.html';
+    });
+  </script>
+</body>
+
+</html>

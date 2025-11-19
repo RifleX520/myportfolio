@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="topbar">
+    <div class="left-group">
+      <button class="back-btn" onclick="window.history.back()">←</button>
+    </div>
+    <h1 class="topbar-title">Profile</h1>
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button>
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+  <!-- MAIN CONTENT -->
+  <main class="page">
+
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <div class="profile-avatar">GP</div>
+
+      <div class="profile-info">
+        <h2 class="profile-name">George Ayyad</h2>
+        <p class="profile-email">george@example.com</p>
+        <p class="profile-phone">059-000-0000</p>
+        <p class="profile-location">Bethlehem, Palestine</p>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="profile-actions">
+      <a href="bookings.html" class="btn btn-secondary full-width">My Bookings</a>
+      <a href="contact.html" class="btn btn-secondary full-width">Contact Us</a>
+      <a href="index.html" class="btn btn-logout full-width">Logout</a>
+    </div>
+
+  </main>
+
+
+
+  <script>
+    // ---- MENU TOGGLE ----
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPopup = document.getElementById('menuPopup');
+
+    menuBtn.addEventListener('click', () => {
+      menuPopup.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+        menuPopup.classList.remove('show');
+      }
+    });
+  </script>
+
+</body>
+
+</html>

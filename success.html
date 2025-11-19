@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>DrivePal – Booking Confirmed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+
+  <!-- Small page-specific tweaks -->
+  <style>
+    /* Center the success card nicely on phone */
+    .page.success-page {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px 32px;
+    }
+
+    .success-box {
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      border-radius: 24px;
+      padding: 24px 20px 20px;
+    }
+
+    /* Make the checkmark look like a badge */
+    .success-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(135deg, #0acb6a, #14a94d);
+      box-shadow: 0 12px 30px rgba(20, 169, 77, 0.5);
+    }
+
+    .success-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .success-message {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .success-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .success-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="topbar">
+    <h1 class="topbar-title">Booking Confirmed</h1>
+    <div class="menu-container">
+      <button id="menuBtn" class="menu-btn">⋮</button>
+      <div id="menuPopup" class="menu-popup">
+        <a href="home.html" class="menu-item">🏠 Home</a>
+        <a href="bookings.html" class="menu-item">📅 Bookings</a>
+        <a href="profile.html" class="menu-item">👤 Profile</a>
+        <a href="contact.html" class="menu-item">📞 Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="page success-page">
+
+    <!-- Success Card -->
+    <div class="success-box">
+      <div class="success-icon">✓</div>
+
+      <h2 class="success-title">Booking Confirmed!</h2>
+
+      <p class="success-message">
+        Your car rental has been successfully booked. You will receive a confirmation email shortly with all the details.
+      </p>
+
+      <div class="success-actions">
+        <a href="bookings.html" class="btn btn-primary full-width">
+          View My Bookings
+        </a>
+        <a href="home.html" class="btn btn-secondary full-width">
+          Back to Home
+        </a>
+      </div>
+
+      <p class="success-note">
+        You can review your trip, see payment details, or cancel according to the company policy from the bookings page.
+      </p>
+    </div>
+
+  </main>
+
+  <script>
+    // ---- MENU TOGGLE ----
+    const menuBtn = document.getElementById('menuBtn');
+    const menuPopup = document.getElementById('menuPopup');
+
+    if (menuBtn && menuPopup) {
+      menuBtn.addEventListener('click', () => {
+        menuPopup.classList.toggle('show');
+      });
+
+      // Close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!menuBtn.contains(e.target) && !menuPopup.contains(e.target)) {
+          menuPopup.classList.remove('show');
+        }
+      });
+    }
+  </script>
+
+</body>
+
+</html>
